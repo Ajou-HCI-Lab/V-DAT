@@ -9,12 +9,12 @@ var cors = require('cors');
 require('dotenv').config();
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 var mainRouter = require('./routes/main');
-var auth_user = require('./routes/middlewares/auth');
+var E4bandRouter = require('./routes/connectE4band');
+var connect_UnityRouter = require('./routes/connect_Unity');
 
 var app = express();
-app.set('jwt-secret', "hahw15ree#^31wfhewarc#@#G1");
+// app.set('jwt-secret', "hahw15ree#^31wfhewarc#@#G1");
 
 app.use(cors());
 
@@ -29,10 +29,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-
-app.use('/main', auth_user);
+app.use('/', connect_UnityRouter);
 app.use('/main', mainRouter);
+app.use('/connect', E4bandRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
