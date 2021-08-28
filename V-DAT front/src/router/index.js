@@ -23,18 +23,18 @@ const routes = [
         // beforeEnter: requireAuth(),
         component: () => import('../views/Main'),
     },
-    {
-        path: '/login',
-        name: 'login',
-        component: () => import('@/views/Login.vue'),
+    // {
+    //     path: '/login',
+    //     name: 'login',
+    //     component: () => import('@/views/Login.vue'),
 
-    },
-    {
-        path: '/join',
-        name: 'join',
-        component: () => import('@/views/Join'),
+    // },
+    // {
+    //     path: '/join',
+    //     name: 'join',
+    //     component: () => import('@/views/Join'),
 
-    },
+    // },
     {
         path: '*',
         redirect: '/main'
