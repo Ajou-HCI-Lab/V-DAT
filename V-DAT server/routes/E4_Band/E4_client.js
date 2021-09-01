@@ -22,6 +22,13 @@ EmpaticaE4.prototype.onConnect = function(){
     EmpaticaE4.client.write(byteStream,'ascii');
 };
 
+EmpaticaE4.prototype.disconnect = function(){
+    let connCmd = device_disconnect + EmpaticaE4.deviceID + "\n";
+    let byteStream = EmpaticaE4.conv(connCmd, {in: 'binary'});
+    EmpaticaE4.client.write(byteStream, 'ascii');
+}
+
+
 
 EmpaticaE4.prototype.connect = function(port, ip, deviceID, cb) {
     //sensor variables
