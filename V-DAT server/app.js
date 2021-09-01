@@ -29,7 +29,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/', connect_UnityRouter);
+app.use('/unity', connect_UnityRouter);
 app.use('/main', mainRouter);
 app.use('/connect', E4bandRouter);
 
