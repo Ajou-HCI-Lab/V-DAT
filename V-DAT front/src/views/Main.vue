@@ -17,16 +17,60 @@
               </div>
             </div>
             <div class="horizontalLine"></div>
-            <div class="btn_contents">
-              <div class="button">
-                <span class="btn">
-                  <b-button v-on:click="connectStart" size="" variant="dark">연결 시작</b-button>
-                </span>
-                <span class="btn">
-                  <b-button v-on:click="connectEnd" size="" variant="dark">연결 종료</b-button>
-                </span>
+            <section>
+              <h1 class="title">
+                E4 밴드의 이름, 서버 ip주소, 포트 번호를 입력 받는 부분 입니다(임시)
+              </h1>
+              <h3>
+                E4 band name
+                <b-form-input v-model="deviceId" placeholder="Please input E4 band Name"></b-form-input>
+                {{ deviceId }}
+              </h3>
+              <h3>
+                Server IP address
+                <b-form-input v-model="serverIp" placeholder="Please input E4 server IP"></b-form-input>
+                {{ serverIp }}
+              </h3>
+              <h3>
+                Port number
+                <b-form-input v-model="e4Port" placeholder="Please input E4 port number"></b-form-input>
+              </h3>
+              <div class="btn_contents">
+                <h1 class="title">Select sensor data</h1>
+                <div class="button">
+                  <span v-for="sensor in sensors" :key="sensor.name" class="btn">
+                    <!-- <b-button squared :pressed.sync="sensor.state" variant="primary">{{ sensor.name }}</b-button> -->
+                    <b-form-checkbox v-model="sensor.state">{{ sensor.name }}</b-form-checkbox>
+                  </span>
+                </div>
               </div>
-            </div>
+              <div class="btn_contents">
+                <div class="button">
+                  <span class="btn">
+                    <b-button v-on:click="connectStart" size="" variant="dark">연결 시작</b-button>
+                  </span>
+                  <span class="btn">
+                    <b-button v-on:click="connectEnd" size="" variant="dark">연결 종료</b-button>
+                  </span>
+                </div>
+              </div>
+            </section>
+            <div class="horizontalLine"></div>
+            <section>
+              <h1 class="title">
+                HMD, Eye tracker와 연결을 준비하는 부분 입니다(임시)
+              </h1>
+              <div class="btn_contents">
+                <div class="button">
+                  <span class="btn">
+                    <b-button variant="dark">연결 시작</b-button>
+                  </span>
+                  <span class="btn">
+                    <b-button variant="dark">연결 종료</b-button>
+                  </span>
+                </div>
+              </div>
+            </section>
           </div>
         </div>
       </section>
@@ -45,17 +89,36 @@ export default {
   components: { NavBar },
   data() {
     return {
-      videoUrl: "https://dt1amnyxy57si.cloudfront.net/videos/노태형_2.mp4",
-      fetched: true,
+      state: false,
+      deviceId: "",
+      serverIp: "",
+      e4Port: null,
+      sensors: [
+        { name: "E4 ACC", state: false },
+        { name: "E4 BVP", state: false },
+        { name: "E4 TEMP", state: false },
+        { name: "E4 GSR", state: false },
+        { name: "E4 IBI", state: false },
+      ],
     };
   },
   computed: {},
   methods: {
     connectStart: function() {
+      let temp = new Array();
+      this.sensors.forEach((element, index) => {
+        if (element.state == true) {
+          temp.push(index);
+        }
+      });
+
       this.$http
         .post("/connect/start", {
           state: !this.connection,
-          name: this.selected,
+          deviceId: this.deviceId,
+          serverIp: this.serverIp,
+          e4Port: this.e4Port,
+          sensor: temp,
         })
         .then((result) => {
           console.log(result.data);
@@ -130,6 +193,7 @@ p {
   /* border: solid; */
   display: flex;
   padding: 6px 0;
+  justify-content: center;
 }
 .icon {
   box-sizing: content-box;
