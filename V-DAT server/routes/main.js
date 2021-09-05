@@ -7,8 +7,20 @@ const dbPromise = require('./database/databasePromise');
 
 router.post('/getData', (req, res) => {
     
+    const sql = "select * from e4Acc " +
+                "INTO OUTFILE '~/e4Acc.csv' " +
+                "FIELDS TERMINATED BY ',' " + 
+                "LINES TERMINATED BY '\n';";
 
+    db.pool.query(sql, function(err, res){
+        try{
+            console.log(err);
+        }catch{
+            console.log(res);
+        }
+    })
+
+    res.send('Done');
 })
-
 
 module.exports = router;
