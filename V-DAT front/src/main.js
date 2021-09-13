@@ -25,7 +25,7 @@ const axiosConfig = {
   timeout: 30000,
 };
 Vue.prototype.$http = Axios.create(axiosConfig);
-Vue.prototype.$http.defaults.headers.common['x-access-token'] = Vue.cookie.get('x-access-token');
+//Vue.prototype.$http.defaults.headers.common['x-access-token'] = Vue.cookie.get('x-access-token');
 
 
 Vue.config.productionTip = false
