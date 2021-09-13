@@ -16,7 +16,11 @@ var connect_UnityRouter = require('./routes/connect_Unity');
 var app = express();
 // app.set('jwt-secret', "hahw15ree#^31wfhewarc#@#G1");
 
-app.use(cors());
+app.use(cors({
+  exposedHeaders: ['Content-Disposition']
+}),
+);
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
