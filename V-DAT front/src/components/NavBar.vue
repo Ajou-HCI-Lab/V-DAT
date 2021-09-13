@@ -1,11 +1,10 @@
 <template>
-  <b-navbar toggleable="lg" type="dark" variant="info">
-    <b-navbar-brand href="#">VRsocial</b-navbar-brand>
+  <b-navbar toggleable="lg" type="dark" variant="primary">
+    <b-navbar-brand href="#">V-DAT</b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
     <b-collapse id="nav-collapse" is-nav>
-
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
         <b-nav-item-dropdown right>
@@ -25,10 +24,8 @@
 
 <script>
 export default {
-name: "NavBar"
-}
+  name: "NavBar",
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
